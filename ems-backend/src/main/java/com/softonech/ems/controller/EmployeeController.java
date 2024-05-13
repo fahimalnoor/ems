@@ -1,6 +1,8 @@
 package com.softonech.ems.controller;
 
 import com.softonech.ems.dto.EmployeeDto;
+import com.softonech.ems.entity.Employee;
+import com.softonech.ems.exception.ResourceNotFoundException;
 import com.softonech.ems.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,6 +45,13 @@ public class EmployeeController {
                                                       @RequestBody EmployeeDto updatedEmployee){
         EmployeeDto employeeDto = employeeService.updateEmployee(employeeId, updatedEmployee);
         return ResponseEntity.ok(employeeDto);
+    }
+
+    //building delete employee rest api
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
+        employeeService.deleteEmployee(employeeId);
+        return ResponseEntity.ok("Employee deleted successfully");
     }
 
 }
