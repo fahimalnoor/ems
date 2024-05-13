@@ -2,12 +2,15 @@ package com.softonech.ems.service.impl;
 
 import com.softonech.ems.dto.EmployeeDto;
 import com.softonech.ems.entity.Employee;
+import com.softonech.ems.exception.ResourceNotFoundException;
 import com.softonech.ems.mapper.EmployeeMapper;
 import com.softonech.ems.repository.EmployeeRepository;
 import com.softonech.ems.service.EmployeeService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
@@ -18,5 +21,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+    }
+
+    @Override
+    public EmployeeDto getEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Employee doesn't exist for id: " + employeeId ));
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 }
