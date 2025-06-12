@@ -1,5 +1,5 @@
 **Ems**
-Employee management system using Spring boot and React.js stack. This project has been done as a practice session to sharpen up Full-stack development.  
+Employee management system using Spring boot (Java) and React.js stack. This project has been done as a practice session to sharpen up Full-stack development.  
 
 ***FEATURES***
 Features 1 - CRUD REST APIs for Employee Management Module
